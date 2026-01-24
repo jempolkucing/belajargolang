@@ -18,13 +18,13 @@ var kategori = []Kategori{
 	{ID: 3, Nama: "Sembako"},
 }
 
-// GET http://localhost:8080/api/categories
+// GET http://localhost:8080/tugas1/api/categories
 func GetSemuaKategori(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(kategori)
 }
 
-// POST localhost:8080/api/categories
+// POST localhost:8080/tugas1/api/categories
 func KategoriBaru(w http.ResponseWriter, r *http.Request) {
 	var kategoriBaru Kategori
 	err := json.NewDecoder(r.Body).Decode(&kategoriBaru)
@@ -42,9 +42,9 @@ func KategoriBaru(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(kategoriBaru)
 }
 
-// POST localhost:8080/api/categories/{id}
+// POST localhost:8080/tugas1/api/categories/{id}
 func KategoribyID(w http.ResponseWriter, r *http.Request) {
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/tugas1/api/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Invalid Kategori ID", http.StatusBadRequest)
@@ -62,9 +62,9 @@ func KategoribyID(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Kategori tidak ditemukan", http.StatusNotFound)
 }
 
-// PUT localhost:8080/api/categories/{id}
+// PUT localhost:8080/tugas1/api/categories/{id}
 func UpdateKategori(w http.ResponseWriter, r *http.Request) {
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/tugas1/api/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Invalid Kategori ID", http.StatusBadRequest)
@@ -91,9 +91,9 @@ func UpdateKategori(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Kategori tidak ditemukan", http.StatusNotFound)
 }
 
-// DELETE localhost:8080/api/categories/{id}
+// DELETE localhost:8080/tugas1/api/categories/{id}
 func HapusKategori(w http.ResponseWriter, r *http.Request) {
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/categories/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/tugas1/api/categories/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Invalid Kategori ID", http.StatusBadRequest)

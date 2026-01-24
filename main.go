@@ -1,13 +1,18 @@
 package main
 
 import (
+	"belajargolang/module"
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"tugas1/module"
 )
 
 func main() {
+	// localhost:8080/
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		http.ServeFile(w, r, "index.html")
+	})
 	// localhost:8080/health
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")

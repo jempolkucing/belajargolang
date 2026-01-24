@@ -1,3 +1,3 @@
-module tugas1
+module belajargolang
 
 go 1.24.6

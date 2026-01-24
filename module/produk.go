@@ -20,13 +20,13 @@ var produk = []Produk{
 	{ID: 3, Nama: "kecap", Harga: 12000, Stok: 20},
 }
 
-// GET http://localhost:8080/api/produk
+// GET http://localhost:8080/tugas1/api/produk
 func GetSemuaProduk(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(produk)
 }
 
-// POST localhost:8080/api/produk
+// POST localhost:8080/tugas1/api/produk
 func ProdukBaru(w http.ResponseWriter, r *http.Request) {
 	// baca data dari request
 	var produkBaru Produk
@@ -45,10 +45,10 @@ func ProdukBaru(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(produkBaru)
 }
 
-// POST localhost:8080/api/produk/{id}
+// POST localhost:8080/tugas1/api/produk/{id}
 func ProdukbyID(w http.ResponseWriter, r *http.Request) {
 
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/tugas1/api/produk/")
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
 		http.Error(w, "Invalid Produk ID", http.StatusBadRequest)
@@ -66,10 +66,10 @@ func ProdukbyID(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Produk belum ada", http.StatusNotFound)
 }
 
-// PUT localhost:8080/api/produk/{id}
+// PUT localhost:8080/tugas1/api/produk/{id}
 func UpdateProduk(w http.ResponseWriter, r *http.Request) {
 	// get id dari request
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/tugas1/api/produk/")
 
 	// ganti int
 	id, err := strconv.Atoi(idStr)
@@ -100,10 +100,10 @@ func UpdateProduk(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Produk belum ada", http.StatusNotFound)
 }
 
-// DELETE localhost:8080/api/produk/{id}
+// DELETE localhost:8080/tugas1/api/produk/{id}
 func HapusProduk(w http.ResponseWriter, r *http.Request) {
 	// get id
-	idStr := strings.TrimPrefix(r.URL.Path, "/api/produk/")
+	idStr := strings.TrimPrefix(r.URL.Path, "/tugas1/api/produk/")
 	// ganti id int
 	id, err := strconv.Atoi(idStr)
 	if err != nil {

@@ -1,9 +1,9 @@
 package repositories
 
 import (
+	"belajargolang/models"
 	"database/sql"
 	"errors"
-	"kasir-api2/models"
 )
 
 type ProductRepository struct {

@@ -1,12 +1,12 @@
 package main
 
 import (
+	"belajargolang/database"
+	"belajargolang/handlers"
+	"belajargolang/repositories"
+	"belajargolang/services"
 	"encoding/json"
 	"fmt"
-	"kasir-api2/database"
-	"kasir-api2/handlers"
-	"kasir-api2/repositories"
-	"kasir-api2/services"
 	"log"
 	"net/http"
 	"os"

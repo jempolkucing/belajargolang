@@ -1,8 +1,8 @@
 package services
 
 import (
-	"kasir-api2/models"
-	"kasir-api2/repositories"
+	"belajargolang/models"
+	"belajargolang/repositories"
 )
 
 type ProductService struct {

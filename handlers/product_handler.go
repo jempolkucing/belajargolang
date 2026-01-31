@@ -1,9 +1,9 @@
 package handlers
 
 import (
+	"belajargolang/models"
+	"belajargolang/services"
 	"encoding/json"
-	"kasir-api2/models"
-	"kasir-api2/services"
 	"net/http"
 	"strconv"
 	"strings"

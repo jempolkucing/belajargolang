@@ -1,6 +1,6 @@
-module kasir-api2
+module belajargolang
 
-go 1.25.0
+go 1.24.6
 
 require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect

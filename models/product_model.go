@@ -1,0 +1,20 @@
+package models
+
+type Product struct {
+	ID         int    `json:"id"`
+	Name       string `json:"name"`
+	Price      int    `json:"price"`
+	Stock      int    `json:"stock"`
+	CategoryID int    `json:"category_id"`
+}
+
+type ProductResponse struct {
+	ID       int    `json:"id"`
+	Name     string `json:"name"`
+	Price    int    `json:"price"`
+	Stock    int    `json:"stock"`
+	Category struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	} `json:"category"`
+}

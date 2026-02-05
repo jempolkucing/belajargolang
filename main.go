@@ -34,7 +34,7 @@ func main() {
 		DBConn: viper.GetString("DB_CONN"),
 	}
 
-	// //Setup Database
+	// Setup Database
 
 	db, err := database.InitDB(config.DBConn)
 	if err != nil {
@@ -55,6 +55,19 @@ func main() {
 
 	http.HandleFunc("/api/category", categoryHandler.HandleCategories)
 	http.HandleFunc("/api/category/", categoryHandler.HandleCategoryByID)
+
+	transactionRepo := repositories.NewTransactionRepository(db)
+	transactionService := services.NewTransactionService(transactionRepo)
+	transactionHandler := handlers.NewTransactionHandler(transactionService)
+
+	http.HandleFunc("/api/checkout", transactionHandler.HandleCheckout) // POST
+
+	reportRepo := repositories.NewReportRepository(db)
+	reportService := services.NewReportService(reportRepo)
+	reportHandler := handlers.NewReportHandler(reportService)
+
+	http.HandleFunc("/api/report/hari-ini", reportHandler.HandleToday)
+	http.HandleFunc("/api/report", reportHandler.HandleReport)
 
 	// GET localhost:8080/health
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {

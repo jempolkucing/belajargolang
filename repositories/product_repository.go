@@ -14,36 +14,49 @@ func NewProductRepository(db *sql.DB) *ProductRepository {
 	return &ProductRepository{db: db}
 }
 
-func (repo *ProductRepository) GetAll() ([]models.ProductResponse, error) {
-	query := `SELECT 
-    p.id,
-    p.name,
-    p.price,
-    p.stock,
-    p.category_id,
-    c.id AS category_id,
-    c.name AS category_name
-    FROM products p
-    JOIN categories c 
-    ON p.category_id = c.id`
-	rows, err := repo.db.Query(query)
+func (repo *ProductRepository) GetAll(name string) ([]models.ProductResponse, error) {
+
+	query := `
+	SELECT 
+		p.id,
+		p.name,
+		p.price,
+		p.stock,
+		p.category_id,
+		c.name AS category_name
+	FROM products p
+	JOIN categories c ON p.category_id = c.id
+	WHERE p.name ILIKE $1
+	`
+
+	rows, err := repo.db.Query(query, "%"+name+"%")
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
 
 	products := make([]models.ProductResponse, 0)
+
 	for rows.Next() {
 		var p models.ProductResponse
-		var categoryID int
-		var categoryName string
-		err := rows.Scan(&p.ID, &p.Name, &p.Price, &p.Stock, &categoryID, &categoryID, &categoryName)
+
+		err := rows.Scan(
+			&p.ID,
+			&p.Name,
+			&p.Price,
+			&p.Stock,
+			&p.Category.ID,
+			&p.Category.Name,
+		)
 		if err != nil {
 			return nil, err
 		}
-		p.Category.ID = categoryID
-		p.Category.Name = categoryName
+
 		products = append(products, p)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, err
 	}
 
 	return products, nil
